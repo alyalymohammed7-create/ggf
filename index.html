@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+
+<style>
+body{
+  height:100vh;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial, sans-serif;
+  background:#fff0f5;
+  overflow:hidden;
+}
+
+/* tiny hidden text */
+.secret{
+  position:fixed;
+  top:5px;
+  left:6px;
+  font-size:16px; /* كبير شويه */
+  color:black; /* لون اسود */
+  opacity:0.35;
+}
+
+/* credit text bottom right */
+.credit{
+  position:fixed;
+  bottom:5px;
+  right:10px;
+  font-size:16px; /* كبرنا التوقيع */
+  color:black; /* لون اسود */
+  opacity:0.8;
+}
+
+/* question */
+h1{
+  margin-bottom:20px;
+  text-align:center;
+  font-size:28px;
+}
+
+/* buttons */
+button{
+  font-size:22px;
+  padding:12px 28px;
+  margin:10px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+#yes{
+  background:#ff4d6d;
+  color:white;
+}
+
+#no{
+  background:#ddd;
+}
+
+/* floating hearts */
+.heart{
+  position:absolute;
+  top:-20px;
+  font-size:20px;
+  animation:fall 5s linear forwards;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="secret">marry me?</div>
+
+<h1 id="question">Will you be my Valentine?</h1>
+
+<div id="buttons">
+  <button id="yes" onclick="yesClicked()">Yes</button>
+  <button id="no" onclick="noClicked()">No</button>
+</div>
+
+<div class="credit">by: ur bonite(ali)</div>
+
+<script>
+let yesSize = 22;
+let texts = [
+  "Are you sure?",
+  "Really sure?",
+  "Think again 😞",
+  "Come on 💔"
+];
+let i = 0;
+
+/* NO button */
+function noClicked(){
+  yesSize += 10;
+  document.getElementById("yes").style.fontSize = yesSize + "px";
+  document.getElementById("no").innerText = texts[i % texts.length];
+  i++;
+}
+
+/* YES button */
+function yesClicked(){
+  // تغيير النص مع قلب 💗
+  document.getElementById("question").innerHTML = "ayayayay<br>best choice ever mommy💗😞";
+  
+  // إخفاء الأزرار
+  document.getElementById("buttons").style.display = "none";
+
+  // يبدأ مطر القلوب 💗 بعد الضغط
+  setInterval(()=>{
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "💗";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = (18 + Math.random()*20) + "px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+  },250);
+}
+</script>
+
+</body>
+</html>
